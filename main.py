@@ -105,7 +105,7 @@ def auto_redial():
                 continue
 
             # Wait for the page to update after selecting the campaign
-            time.sleep(5)
+            time.sleep(2)
 
             # Step 2: Get the "Dialed" and "Total" values
             try:
@@ -151,7 +151,7 @@ def auto_redial():
                     print(f"❌ Failed to select first option from 'Choose call status' dropdown for campaign '{campaign_text}': {e}")
                     continue
 
-                time.sleep(5)  # Wait for the selection to register
+                time.sleep(1)  # Wait for the selection to register
 
                 # Step 5: Click the Redial button
                 try:
@@ -168,7 +168,7 @@ def auto_redial():
                     continue
 
                 # Wait for the redial to process
-                time.sleep(5)
+                time.sleep(1)
             else:
                 print(f"❌ Dialed ({dialed}) does not equal Total ({total}) for campaign '{campaign_text}'. Moving to the next campaign.")
 
@@ -180,7 +180,7 @@ try:
     while True:
         auto_redial()
         print("Waiting 1 seconds before the next cycle...")
-        time.sleep(5)  # Check every minute
+        time.sleep(2)  # Check every minute
 except KeyboardInterrupt:
     print("Automation stopped by user.")
     driver.quit()
