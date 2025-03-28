@@ -33,14 +33,14 @@ def perform_login(driver, is_restart=False):
         username_field = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Username']")))
         print("✅ Found username field")
         username_field.clear()
-        username_field.send_keys("kpilustrisimo")
-        print("✅ Entered username")
+        username_field.send_keys("KK")
+        print("✅ KK")
 
         password_field = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Password']")))
         print("✅ Found password field")
         password_field.clear()
         password_field.send_keys("$PMadr!d1234")
-        print("✅ Entered password")
+        print("✅ $PMadr!d1234")
 
         login_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#normalLogin > button")))
         print("✅ Found login button")
