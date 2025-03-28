@@ -39,8 +39,8 @@ def perform_login(driver, is_restart=False):
         password_field = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Password']")))
         print("✅ Found password field")
         password_field.clear()
-        password_field.send_keys("$PMadr!d1234")
-        print("✅ $PMadr!d1234")
+        password_field.send_keys("$PMadr!d141")
+        print("✅ $PMadr!d141")
 
         login_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#normalLogin > button")))
         print("✅ Found login button")
