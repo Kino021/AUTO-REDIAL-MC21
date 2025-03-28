@@ -75,7 +75,7 @@ def navigate_to_predictive_dialer(driver, is_restart=False):
         print(f"Failed to navigate: {e}")
         return False
 
-# Function to initialize a new driver
+# Function to initialize a new drivers
 def initialize_driver():
     global driver
     if driver is not None:
