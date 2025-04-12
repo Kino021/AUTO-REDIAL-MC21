@@ -30,6 +30,59 @@ def is_8pm_philippine_time():
     ph_tz = pytz.timezone('Asia/Manila')
     return datetime.now(ph_tz).hour >= 20
 
+# Function to perform login with minimal delays
+def perform_login(driver, is_restart=False):
+    try:
+        main_url = "https://texxen-voliappe2.spmadridph.com/admin"
+        driver.get(main_url)
+        wait = WebDriverWait(driver, 15)
+
+        username_field = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Username']")))
+        print("✅ Found username field")
+        username_field.clear()
+        username_field.send_keys("KK")
+        print("✅ KK")
+
+        password_field = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Password']")))
+        print("✅ Found password field")
+        password_field.clear()
+        password_field.send_keys("$PMadr!d141")
+        print("✅ $PMadr!d141")
+
+        login_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#normalLogin > button")))
+        print("✅ Found login button")
+        if is_restart:
+            driver.execute_script("arguments[0].click();", login_button)  # Faster JS click on restart
+            print("✅ Clicked login button (JS)")
+        else:
+            login_button.click()
+            print("✅ Clicked login button")
+            time.sleep(1)  # Only delay on initial login
+
+        return True
+    except Exception as e:
+        print(f"Login failed: {e}")
+        return False
+
+# Function to navigate to Predictive Dialer Monitor with minimal delays
+def navigate_to_predictive_dialer(driver, is_restart=False):
+    try:
+        wait = WebDriverWait(driver, 15)
+        parent_menu = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[1]/div/div/ul/li[3]")))
+        parent_menu.click()
+        print("✅ Clicked parent menu")
+
+        predictive_dialer_monitor = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div[1]/div/div/ul/li[3]/ul/li[2]/a")))
+        predictive_dialer_monitor.click()
+        print("✅ Clicked Predictive Dialer Monitor")
+        if not is_restart:
+            time.sleep(1)  # Only delay on initial navigation
+        return True
+    except Exception as e:
+        print(f"Failed to navigate: {e}")
+        return False
+
+# Function to initialize a new drivers
 def initialize_driver():
     global driver
     if driver is not None:
